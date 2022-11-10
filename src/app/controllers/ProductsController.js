@@ -97,6 +97,26 @@ class ProductsControler {
         )
         return res.status(200).json({ message: "Products updated sucessfully" })
     }
+
+    async delete(req, res) {
+        let path
+        if (req.file) {
+            path = req.file.filename
+        }
+
+        const { name, price, category_id, offer } = req.body
+        const { id } = req.params
+
+        const deleteProduct = await Products.destroy(
+            {
+                where: { id },
+                truncate: true
+            }
+        )
+        return res.status(202).json({ message: "Produto deletadim mané" })
+
+
+    }
 }
 
 export default new ProductsControler()

@@ -112,5 +112,28 @@ class OrderController {
   }
 
 
+  async delete(req, res) {
+
+    const { admins: isAdmin } = await User.findByPk(req.userId)
+    //para validar se o usuario é admin
+    if (!isAdmin) {
+      return res.status(401).json({ error: "no permission" })
+    }
+
+
+    const { id } = req.params
+    console.log(id)
+    try {
+      await Order.deleteOne({ id: id })
+
+    } catch (error) {
+      return res.status(400).json({ error, message: "Provavelmente o id do pedido ta errado" })
+    }
+
+
+    return res.json({ message: "Status atualizado com sucesso" })
+  }
+
+
 }
 export default new OrderController()

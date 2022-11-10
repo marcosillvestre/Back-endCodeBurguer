@@ -27,7 +27,7 @@ class UserController {
     })
 
     if (userExists) {
-      return res.status(400).json({ error: "This user already exists" })
+      return res.status(409).json({ error: "This user already exists" })
     }
 
     const user = await User.create({
@@ -39,5 +39,14 @@ class UserController {
     })
     return res.status(201).json({ id: user.id, name, email, admins })
   }
+
+  async index(req, res) {
+
+
+    const users = await User.findAll()
+    return res.status(201).json(users)
+
+  }
+
 }
 export default new UserController()
