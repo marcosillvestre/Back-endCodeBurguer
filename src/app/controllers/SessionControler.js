@@ -35,7 +35,7 @@ class SessionControler {
             return res.status(401).json({ error: " you fucking stupid man ??? ya don't know you own password ??" })
         };
 
-        // console.log ( await user.checkPassword(password))
+        // console.log ( await user.checkPassword(password))/                                              
 
 
         return res.json({

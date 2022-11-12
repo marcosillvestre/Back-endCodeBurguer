@@ -28,14 +28,21 @@ class ProductsControler {
         const { filename: path } = req.file
         const { name, price, category_id, offer } = req.body
 
-        const prod = await Products.create({
-            name,
-            price,
-            category_id,
-            path,
-            offer,
-        })
-        return res.json(prod)
+
+        try {
+            const prod = await Products.create({
+                name,
+                price,
+                category_id,
+                path,
+                offer,
+            })
+            return res.json(prod)
+
+        } catch (error) {
+            console.error(error)
+        }
+
     }
 
     async index(req, res) {
