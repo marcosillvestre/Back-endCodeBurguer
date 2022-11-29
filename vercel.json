@@ -1,0 +1,15 @@
+{
+  "name": "real-code-burguer",
+  "version": 2,
+  "public": true,
+  "build": {
+    "src": "src/server.js",
+    "use": "@vercel/node"
+  },
+  "routes": [
+    {
+      "src": "src/routes.js",
+      "dest": "src/server.js"
+    }
+  ]
+}

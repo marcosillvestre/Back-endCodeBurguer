@@ -165,6 +165,7 @@
     "utils-merge": "^1.0.1",
     "uuid": "^8.3.2",
     "vary": "^1.1.2",
+    "vercel": "^28.5.6",
     "widest-line": "^3.1.0",
     "wrap-ansi": "^7.0.0",
     "wrappy": "^1.0.2",
