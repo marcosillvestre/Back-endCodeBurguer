@@ -1,13 +1,13 @@
 import * as Yup from "yup"
-import Products from "../models/Products"
 import Categories from "../models/Categories"
+import Products from "../models/Products"
 import User from "../models/User"
 
 class ProductsControler {
     async store(req, res) {
         const schema = Yup.object().shape({
             name: Yup.string().required(),
-            price: Yup.number().required(),
+            price: Yup.string().required(),
             category_id: Yup.number().required(),
             offer: Yup.boolean(),
         })
@@ -28,21 +28,14 @@ class ProductsControler {
         const { filename: path } = req.file
         const { name, price, category_id, offer } = req.body
 
-
-        try {
-            const prod = await Products.create({
-                name,
-                price,
-                category_id,
-                path,
-                offer,
-            })
-            return res.json(prod)
-
-        } catch (error) {
-            console.error(error)
-        }
-
+        const prod = await Products.create({
+            name,
+            price,
+            category_id,
+            path,
+            offer,
+        })
+        return res.json(prod)
     }
 
     async index(req, res) {
@@ -106,22 +99,22 @@ class ProductsControler {
     }
 
     async delete(req, res) {
-        let path
-        if (req.file) {
-            path = req.file.filename
+
+        const { id } = req.params
+        const ProductToBeDeleted = await Products.findOne({ where: { id } })
+
+        if (!ProductToBeDeleted) {
+            return res.status(400).json({ message: "id not found" })
+
+        }
+        if (!id) {
+            return res.status(400).json({ message: "id not found" })
         }
 
-        const { name, price, category_id, offer } = req.body
-        const { id } = req.params
 
-        const deleteProduct = await Products.destroy(
-            {
-                where: { id },
-                truncate: true
-            }
-        )
-        return res.status(202).json({ message: "Produto deletadim mané" })
 
+        await Products.destroy({ where: { id } })
+        return res.status(200).json({ message: "Produto deletadim mané" })
 
     }
 }
