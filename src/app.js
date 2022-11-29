@@ -1,8 +1,8 @@
-import express from "express"
-import routes from "./routes"
-import "./database"
 import cors from "cors"
+import express from "express"
 import { resolve } from "path"
+import "./database"
+import routes from "./routes"
 
 class App {
   constructor() {
