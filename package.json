@@ -192,7 +192,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon",
     "debug": "nodemon --inspect",
-    "start": "node -r sucrase/register src/server.js"
+    "start": "node -r sucrase/register src/app.js"
   },
   "keywords": [],
   "author": "",

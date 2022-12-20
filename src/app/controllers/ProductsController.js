@@ -100,21 +100,14 @@ class ProductsControler {
 
     async delete(req, res) {
 
-        const { id } = req.params
-        const ProductToBeDeleted = await Products.findOne({ where: { id } })
+        try {
+            await Products.destroy({ where: { id: req.params.id } })
+            return res.status(200).json({ message: "Product deleted mané" })
 
-        if (!ProductToBeDeleted) {
-            return res.status(400).json({ message: "id not found" })
+        } catch (error) {
+            return res.status(400).json({ error })
 
         }
-        if (!id) {
-            return res.status(400).json({ message: "id not found" })
-        }
-
-
-
-        await Products.destroy({ where: { id } })
-        return res.status(200).json({ message: "Produto deletadim mané" })
 
     }
 }
