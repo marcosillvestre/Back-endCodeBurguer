@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "./src/database",
+      "src": "./database",
       "use": "@vercel/node"
     }
   ],
